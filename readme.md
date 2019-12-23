@@ -1,4 +1,4 @@
-# hub tec-test
+# Hubtec Tasks [![Build Status](https://img.shields.io/travis/com/nilkesede/hubtec-tasks?style=for-the-badge)](https://travis-ci.com/nilkesede/hubtec-tasks)
 
 Install it and run:
 
