@@ -39,9 +39,6 @@
     "node": ">=12",
     "npm": ">=5"
   },
-  "now": {
-    "alias": "hubtec-tasks.now.sh"
-  },
   "jest": {
     "moduleNameMapper": {
       "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styles-mock.js"
