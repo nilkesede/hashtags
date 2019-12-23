@@ -1,0 +1,8 @@
+@import './normalize';
+@import './flexboxgrid';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
