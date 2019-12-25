@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
 import Head from '../components/head';
 
-export default class Index extends Component {
+class Index extends Component {
   title = 'Home | Hubtec Tasks';
   description = 'Hubtec tasks management app.';
 
@@ -14,3 +16,5 @@ export default class Index extends Component {
     );
   }
 }
+
+export default connect()(Index);
