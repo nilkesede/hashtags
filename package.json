@@ -4,9 +4,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node server",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node server",
     "export": "next export",
     "test": "eslint src && eslint __tests__ && jest __tests__/**/*.test.js"
   },
@@ -50,8 +50,7 @@
     "redux-mock-store": "1.5.4"
   },
   "engines": {
-    "node": ">=10 <13",
-    "npm": ">=5"
+    "node": ">=10 <13"
   },
   "jest": {
     "moduleNameMapper": {
