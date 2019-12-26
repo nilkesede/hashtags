@@ -29,11 +29,11 @@ function * makeLogin(payload) {
         const user = yield createOrLoginUser(payload, true);
         yield put(loadUserData(user));
       } catch (error) {
-        put(failure(error));
+        yield put(failure(error));
       }
     }
 
-    put(failure(error));
+    yield put(failure(error));
   }
 }
 
@@ -43,7 +43,7 @@ function * makeLogout() {
     yield post('/api/logout');
     yield put(unloadUserData());
   } catch (error) {
-    put(failure(error));
+    yield put(failure(error));
   }
 }
 

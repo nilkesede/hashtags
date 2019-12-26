@@ -2,6 +2,7 @@ const withOffline = require('next-offline');
 const withSass = require('@zeit/next-sass');
 
 const nextConfig = {
+  env: {CLIENT_CREDENTIALS: process.env.CLIENT_CREDENTIALS},
   target: 'serverless',
   transformManifest: manifest => ['/'].concat(manifest),
   generateInDevMode: false,

@@ -15,8 +15,8 @@ class LoginForm extends Component {
   }
 
   state = {
-    email: 'nil@ksde.pw',
-    password: 'piramide'
+    email: '',
+    password: ''
   };
 
   handleInputChange = event => {
