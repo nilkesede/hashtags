@@ -2,10 +2,13 @@ import React from 'react';
 import {mount} from 'enzyme';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
+import Router from 'next/router';
 
 import '../setup';
 import Index from '../../src/pages';
 import LoginForm from '../../src/components/login-form';
+
+Router.push = jest.fn();
 
 describe('Index', () => {
   const mockStore = configureStore();
