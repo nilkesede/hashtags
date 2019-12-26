@@ -1,15 +1,31 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {mount} from 'enzyme';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 
+import '../setup';
 import Index from '../../src/pages';
-
-Enzyme.configure({adapter: new Adapter()});
+import LoginForm from '../../src/components/login-form';
 
 describe('Index', () => {
-  const index = shallow(<Index/>);
+  const mockStore = configureStore();
+
+  const store = mockStore({
+    error: null,
+    user: null,
+    tasks: []
+  });
+
+  const wrapper = mount(
+    <Provider store={store}>
+      <Index/>
+    </Provider>);
 
   it('should show the app title', () => {
-    expect(index.find('h1').text()).toEqual('Hubtec tasks management app.');
+    expect(wrapper.find('h1').text()).toEqual('Hubtec tasks management app.');
+  });
+
+  it('should show the login form', () => {
+    expect(wrapper.find(LoginForm).exists()).toBeTruthy();
   });
 });
