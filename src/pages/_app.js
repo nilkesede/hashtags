@@ -17,7 +17,10 @@ class MyApp extends App {
       pageProperties = await Component.getInitialProps({ctx});
     }
 
-    ctx.store.dispatch(loadUserData(ctx.req.session.user || null));
+    const user = ctx.req && ctx.req.session ? ctx.req.session.user : null;
+    if (user) {
+      ctx.store.dispatch(loadUserData(user));
+    }
 
     return {pageProps: pageProperties};
   }
