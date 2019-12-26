@@ -6,7 +6,7 @@ import Router from 'next/router';
 import Head from '../components/head';
 import LoginForm from '../components/login-form';
 
-class Index extends Component {
+class Login extends Component {
   static propTypes = {
     user: object,
     error: object
@@ -17,12 +17,12 @@ class Index extends Component {
     error: null
   }
 
-  title = 'Home | Hubtec Tasks';
-  description = 'Hubtec tasks management app.';
+  title = 'Login | Hubtec Tasks';
+  description = 'Login | Hubtec tasks management app.';
 
   checkUser = () => {
-    if (!this.props.user) {
-      Router.push('/login');
+    if (this.props.user) {
+      Router.push('/');
     }
   }
 
@@ -48,4 +48,4 @@ class Index extends Component {
   }
 }
 
-export default connect(state => state)(Index);
+export default connect(state => state)(Login);
