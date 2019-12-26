@@ -58,7 +58,7 @@ app.prepare().then(() => {
     response.json({status: true});
   });
 
-  server.post('/service-worker.js', (request, response) => {
+  server.get('/service-worker.js', (request, response) => {
     const parsedUrl = parse(request.url, true);
     const {pathname} = parsedUrl;
 
