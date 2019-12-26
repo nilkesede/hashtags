@@ -3,8 +3,11 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
+import firebase from 'firebase/app';
 
 import createStore from '../store';
+import clientCredentials from '../../credentials/client';
+import {loadUserData} from '../store/actions';
 
 class MyApp extends App {
   static async getInitialProps({Component, ctx}) {
@@ -14,7 +17,13 @@ class MyApp extends App {
       pageProperties = await Component.getInitialProps({ctx});
     }
 
+    ctx.store.dispatch(loadUserData(ctx.req.session.user || null));
+
     return {pageProps: pageProperties};
+  }
+
+  componentDidMount() {
+    firebase.initializeApp(clientCredentials);
   }
 
   render() {
