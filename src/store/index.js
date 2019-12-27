@@ -1,8 +1,14 @@
 import {applyMiddleware, createStore} from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import firebase from 'firebase/app';
 
 import rootReducer, {defaultState} from './reducer';
 import rootSaga from './saga';
+import clientCredentials from '../../credentials/client';
+
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(clientCredentials);
+}
 
 const bindMiddleware = middleware => {
   if (process.env.NODE_ENV !== 'production') {

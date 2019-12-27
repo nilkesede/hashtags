@@ -3,11 +3,9 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
-import firebase from 'firebase/app';
 
 import createStore from '../store';
-import clientCredentials from '../../credentials/client';
-import {loadUserData} from '../store/actions';
+import {loadUserData, listenTasksON} from '../store/actions';
 
 class MyApp extends App {
   static async getInitialProps({Component, ctx}) {
@@ -26,7 +24,9 @@ class MyApp extends App {
   }
 
   componentDidMount() {
-    firebase.initializeApp(clientCredentials);
+    if (this.props.store.getState().user) {
+      this.props.store.dispatch(listenTasksON());
+    }
   }
 
   render() {

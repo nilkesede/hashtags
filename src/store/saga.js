@@ -1,9 +1,20 @@
-import {all, put, takeLatest} from 'redux-saga/effects';
+import {all, put, take, takeLatest, takeEvery, delay, select} from 'redux-saga/effects';
+import {eventChannel as EventChannel} from 'redux-saga';
 import {post} from 'axios';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
 
-import {actionTypes, failure, loadUserData, unloadUserData} from './actions';
+import {
+  actionTypes,
+  failure,
+  loadUserData,
+  unloadUserData,
+  loadUserTasks,
+  unloadUserTasks,
+  listenTasksON,
+  listenTasksOFF
+} from './actions';
 
 function * createOrLoginUser({email, password}, login = false) {
   const action = login ? 'signInWithEmailAndPassword' : 'createUserWithEmailAndPassword';
@@ -13,21 +24,22 @@ function * createOrLoginUser({email, password}, login = false) {
 
   yield post('/api/login', {token});
 
-  return {
+  const userData = {
     uid: user.uid,
     email: user.email
   };
+
+  yield put(loadUserData(userData));
+  yield put(listenTasksON());
 }
 
 function * makeLogin(payload) {
   try {
-    const user = yield createOrLoginUser(payload);
-    yield put(loadUserData(user));
+    yield createOrLoginUser(payload);
   } catch (error) {
     if (error.code === 'auth/email-already-in-use') {
       try {
-        const user = yield createOrLoginUser(payload, true);
-        yield put(loadUserData(user));
+        yield createOrLoginUser(payload, true);
       } catch (error) {
         yield put(failure(error));
       }
@@ -42,6 +54,73 @@ function * makeLogout() {
     yield firebase.auth().signOut();
     yield post('/api/logout');
     yield put(unloadUserData());
+    yield put(listenTasksOFF());
+  } catch (error) {
+    yield put(failure(error));
+  }
+}
+
+let channelDB = null;
+function * addDatabaseListener() {
+  try {
+    const user = yield select(({user}) => user);
+
+    if (!user || channelDB) {
+      return;
+    }
+
+    channelDB = new EventChannel(emiter => {
+      const database = firebase.firestore();
+
+      return database.collection('tasks').onSnapshot(
+        snapshot => {
+          const tasks = [];
+
+          snapshot.forEach(document_ => {
+            const task = document_.data();
+
+            if (task.userId === user.uid && !task.delete) {
+              tasks.push(task);
+            }
+          });
+
+          if (tasks) {
+            emiter(tasks);
+          }
+        },
+        error => {
+          throw error;
+        }
+      );
+    });
+
+    while (true) {
+      const tasks = yield take(channelDB);
+      yield put(loadUserTasks(tasks));
+      yield delay(500);
+    }
+  } catch (error) {
+    yield put(failure(error));
+  }
+}
+
+function * removeDatabaseListener() {
+  if (channelDB) {
+    try {
+      yield channelDB.close();
+      yield put(unloadUserTasks());
+    } catch (error) {
+      yield put(failure(error));
+    }
+  }
+}
+
+function * saveTaskOnDatabase({task}) {
+  try {
+    const database = firebase.firestore();
+    yield database.collection('tasks')
+      .doc(`${task.id}`)
+      .set(task);
   } catch (error) {
     yield put(failure(error));
   }
@@ -50,7 +129,10 @@ function * makeLogout() {
 function * rootSaga() {
   yield all([
     takeLatest(actionTypes.MAKE_LOGIN, makeLogin),
-    takeLatest(actionTypes.MAKE_LOGOUT, makeLogout)
+    takeLatest(actionTypes.MAKE_LOGOUT, makeLogout),
+    takeLatest(actionTypes.LISTEN_TASKS_ON, addDatabaseListener),
+    takeLatest(actionTypes.LISTEN_TASKS_OFF, removeDatabaseListener),
+    takeEvery(actionTypes.SAVE_TASK, saveTaskOnDatabase)
   ]);
 }
 

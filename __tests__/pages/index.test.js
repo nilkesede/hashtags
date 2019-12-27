@@ -15,7 +15,10 @@ describe('Index', () => {
 
   const store = mockStore({
     error: null,
-    user: null,
+    user: {
+      uid: 11,
+      email: 'nil@ksde.pw'
+    },
     tasks: []
   });
 
@@ -30,5 +33,9 @@ describe('Index', () => {
 
   it('should show the login form', () => {
     expect(wrapper.find(LoginForm).exists()).toBeTruthy();
+  });
+
+  it('should show tasks list', () => {
+    expect(wrapper.find('ul').exists()).toBeTruthy();
   });
 });
