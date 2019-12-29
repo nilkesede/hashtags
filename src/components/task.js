@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {func, object} from 'prop-types';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faTrash} from '@fortawesome/free-solid-svg-icons';
 import debounce from 'lodash.debounce';
 
 import {saveTask, updateTask} from '../store/actions';
+import Datepicker from './datepicker';
 
 class Task extends Component {
   static propTypes = {
@@ -37,19 +38,32 @@ class Task extends Component {
     }));
   }
 
+  handleScheduleChange = date => {
+    const {task} = this.props;
+    task.schedule = date;
+    this.delayedEditTask(task);
+  }
+
   render() {
     const {task} = this.props;
 
     return (
-      <div>
-        <input type="text" value={task.text} className="form-control" onChange={event => this.handleEditTask(event, task)}/>
-        <button type="button" className="btn-ico text-muted" onClick={event => this.handleDeleteTask(event, task)}><FontAwesomeIcon icon={faTimes}/></button>
+      <div className="row">
+        <div className="col">
+          <input type="text" value={task.text} className="form-control" onChange={event => this.handleEditTask(event, task)}/>
+        </div>
+
+        <div className="col-5 col-sm-4 px-0">
+          <Datepicker defaultDate={task.schedule} onChange={this.handleScheduleChange}/>
+        </div>
+
+        <div className="col-auto px-0">
+          <button type="button" className="btn text-muted" title="delete task" onClick={event => this.handleDeleteTask(event, task)}><FontAwesomeIcon icon={faTrash}/></button>
+        </div>
 
         <style jsx>{`
-        input {
-          width: calc(100% - 40px);
-          display: inline-block;
-          margin-top: 10px;
+        .row {
+          margin-top: 15px;
         }
         button {
           margin-left: 10px;

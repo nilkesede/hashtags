@@ -2,3 +2,9 @@ $enable-rounded: false;
 
 $font-weight-light: 300;
 $font-weight-base: $font-weight-light;
+
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px
+);

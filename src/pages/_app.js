@@ -3,9 +3,10 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
-
 import {config as faConfig} from '@fortawesome/fontawesome-svg-core';
+
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import 'flatpickr/dist/flatpickr.css';
 
 import createStore from '../store';
 import {loadUserData, listenTasksON} from '../store/actions';

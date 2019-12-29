@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {func, object} from 'prop-types';
 
 import {saveTask} from '../store/actions';
+import Datepicker from './datepicker';
 
 class AddTask extends Component {
   static propTypes = {
@@ -17,6 +18,9 @@ class AddTask extends Component {
   state = {
     value: ''
   }
+
+  datePicker = React.createRef();
+  scheduleDate = null;
 
   handleValueChange = event => {
     this.setState({
@@ -33,18 +37,28 @@ class AddTask extends Component {
       text: this.state.value,
       userId: this.props.user.uid,
       delete: false,
-      schedule: null
+      schedule: this.scheduleDate
     }));
 
     this.setState({value: ''});
+    this.datePicker.current.clear();
+  }
+
+  handleScheduleChange = date => {
+    this.scheduleDate = date;
   }
 
   render() {
     return (
-      <form onSubmit={this.handleAddTask}>
-        <input type="text" value={this.state.value} className="form-control"
-          placeholder="add new task..." onChange={this.handleValueChange}/>
-      </form>
+      <div className="row">
+        <form className="col" onSubmit={this.handleAddTask}>
+          <input type="text" value={this.state.value} className="form-control"
+            placeholder="add new task..." onChange={this.handleValueChange}/>
+        </form>
+        <div className="col-6 col-sm-5 px-0">
+          <Datepicker ref={this.datePicker} onChange={this.handleScheduleChange} onSubmit={this.handleAddTask}/>
+        </div>
+      </div>
     );
   }
 }

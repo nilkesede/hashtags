@@ -53,14 +53,14 @@ class Index extends Component {
         <nav className="navbar sticky-top navbar-dark bg-dark px-0 mb-3">
           <div className="container">
             <span className="navbar-brand mb-0 h1">{this.title}</span>
-            <button type="button" className="btn-ico text-danger" onClick={this.handleLogout}><FontAwesomeIcon icon={faSignOutAlt}/></button>
+            <button type="button" className="btn text-danger" onClick={this.handleLogout}><FontAwesomeIcon icon={faSignOutAlt}/></button>
           </div>
         </nav>
 
         <div className="container">
           <AddTask/>
 
-          <br/>
+          <br/><br/>
 
           <ul className="list-unstyled">
             {tasks &&
