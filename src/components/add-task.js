@@ -42,7 +42,8 @@ class AddTask extends Component {
   render() {
     return (
       <form onSubmit={this.handleAddTask}>
-        <input type="text" value={this.state.value} className="form-control" placeholder="add message..." onChange={this.handleValueChange}/>
+        <input type="text" value={this.state.value} className="form-control"
+          placeholder="add new task..." onChange={this.handleValueChange}/>
       </form>
     );
   }

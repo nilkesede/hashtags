@@ -13,8 +13,11 @@ import {
   loadUserTasks,
   unloadUserTasks,
   listenTasksON,
-  listenTasksOFF
+  listenTasksOFF,
+  startLoading,
+  stopLoading
 } from './actions';
+import {sortByIdDesc} from '../lib/utils';
 
 function * createOrLoginUser({email, password}, login = false) {
   const action = login ? 'signInWithEmailAndPassword' : 'createUserWithEmailAndPassword';
@@ -35,6 +38,7 @@ function * createOrLoginUser({email, password}, login = false) {
 
 function * makeLogin(payload) {
   try {
+    yield put(startLoading());
     yield createOrLoginUser(payload);
   } catch (error) {
     if (error.code === 'auth/email-already-in-use') {
@@ -46,17 +50,22 @@ function * makeLogin(payload) {
     }
 
     yield put(failure(error));
+  } finally {
+    yield put(stopLoading());
   }
 }
 
 function * makeLogout() {
   try {
+    yield put(startLoading());
     yield firebase.auth().signOut();
     yield post('/api/logout');
     yield put(unloadUserData());
     yield put(listenTasksOFF());
   } catch (error) {
     yield put(failure(error));
+  } finally {
+    yield put(stopLoading());
   }
 }
 
@@ -82,6 +91,8 @@ function * addDatabaseListener() {
             if (task.userId === user.uid && !task.delete) {
               tasks.push(task);
             }
+
+            tasks.sort(sortByIdDesc);
           });
 
           if (tasks) {

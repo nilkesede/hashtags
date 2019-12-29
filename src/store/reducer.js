@@ -3,7 +3,8 @@ import {actionTypes} from './actions';
 export const defaultState = {
   error: null,
   user: null,
-  tasks: null
+  tasks: null,
+  isLoading: false
 };
 
 function reducer(state = defaultState, action = null) {
@@ -48,6 +49,18 @@ function reducer(state = defaultState, action = null) {
 
           return task;
         })}
+      };
+
+    case actionTypes.START_LOADING:
+      return {
+        ...state,
+        ...{isLoading: true}
+      };
+
+    case actionTypes.STOP_LOADING:
+      return {
+        ...state,
+        ...{isLoading: false}
       };
 
     default:

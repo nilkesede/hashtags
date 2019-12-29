@@ -5,6 +5,7 @@ import Router from 'next/router';
 
 import Head from '../components/head';
 import LoginForm from '../components/login-form';
+import LoadingSpinner from '../components/loading-spinner';
 
 class Login extends Component {
   static propTypes = {
@@ -34,24 +35,32 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <Head title={this.title} description={this.description}/>
+      <div className="wrapper">
+        <LoadingSpinner/>
 
-        <LoginForm/>
+        <div className="container-fluid">
+          <Head title={this.title} description={this.description}/>
+
+          <LoginForm/>
+        </div>
 
         <style global jsx>{`
-        html, body, #__next, .container-fluid {
-          height: 100%;
-        }`}
+          html, body, #__next, .container-fluid {
+            width: 100%;
+            height: 100%;
+          }`}
         </style>
         <style jsx>{`
-        .container-fluid {
-          display: flex;
-          align-items: center;
-          padding-top: 40px;
-          padding-bottom: 40px;
-          background-color: #f5f5f5;
-        }`}
+          .wrapper {
+            width: 100%;
+            height: 100%;
+          }
+          .container-fluid {
+            display: flex;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+          }`}
         </style>
       </div>
     );

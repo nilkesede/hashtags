@@ -9,7 +9,9 @@ export const actionTypes = {
   LOAD_USER_TASKS: 'LOAD_USER_TASKS',
   UNLOAD_USER_TASKS: 'UNLOAD_USER_TASKS',
   SAVE_TASK: 'SAVE_TASK',
-  UPDATE_TASK: 'UPDATE_TASK'
+  UPDATE_TASK: 'UPDATE_TASK',
+  START_LOADING: 'START_LOADING',
+  STOP_LOADING: 'STOP_LOADING'
 };
 
 export function failure(error) {
@@ -82,5 +84,17 @@ export function updateTask(task) {
   return {
     type: actionTypes.UPDATE_TASK,
     task
+  };
+}
+
+export function startLoading() {
+  return {
+    type: actionTypes.START_LOADING
+  };
+}
+
+export function stopLoading() {
+  return {
+    type: actionTypes.STOP_LOADING
   };
 }
