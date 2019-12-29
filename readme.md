@@ -1,4 +1,4 @@
-# Hubtec Tasks [![Build Status](https://img.shields.io/travis/com/nilkesede/hubtec-tasks?style=for-the-badge)](https://travis-ci.com/nilkesede/hubtec-tasks)
+# Hubtec Tasks [![Build Status](https://img.shields.io/travis/nilkesede/hubtec-tasks?style=flat-square)](https://travis-ci.org/nilkesede/hubtec-tasks)
 
 I've chosen to use Next.JS as front-end framework, with an NodeJS backend wired to the Firebase Firestore service.
 The NextJS has a whole bunch of nice features out of the box like server-side rendering, prefetching, automatic code splitting etc. Firestore is a secure NoSQL database in the cloud with realtime data update.
