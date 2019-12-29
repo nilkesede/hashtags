@@ -8,17 +8,15 @@ import LoginForm from '../components/login-form';
 
 class Login extends Component {
   static propTypes = {
-    user: object,
-    error: object
+    user: object
   };
 
   static defaultProps = {
-    user: null,
-    error: null
+    user: null
   }
 
   title = 'Login | Hubtec Tasks';
-  description = 'Login | Hubtec tasks management app.';
+  description = 'Hubtec tasks management app.';
 
   checkUser = () => {
     if (this.props.user) {
@@ -36,16 +34,28 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <Head title={this.title} description={this.description}/>
-        <h1>{this.description}</h1>
 
         <LoginForm/>
 
-        <pre>{JSON.stringify(this.props.error, null, 2) }</pre>
+        <style global jsx>{`
+        html, body, #__next, .container-fluid {
+          height: 100%;
+        }`}
+        </style>
+        <style jsx>{`
+        .container-fluid {
+          display: flex;
+          align-items: center;
+          padding-top: 40px;
+          padding-bottom: 40px;
+          background-color: #f5f5f5;
+        }`}
+        </style>
       </div>
     );
   }
 }
 
-export default connect(state => state)(Login);
+export default connect(({user}) => ({user}))(Login);

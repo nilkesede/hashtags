@@ -42,8 +42,20 @@ class Task extends Component {
 
     return (
       <div>
-        <input type="text" value={task.text} onChange={event => this.handleEditTask(event, task)}/>
-        <button type="button" onClick={event => this.handleDeleteTask(event, task)}><FontAwesomeIcon icon={faTimes}/>delete</button>
+        <input type="text" value={task.text} className="form-control" onChange={event => this.handleEditTask(event, task)}/>
+        <button type="button" className="btn-ico text-muted" onClick={event => this.handleDeleteTask(event, task)}><FontAwesomeIcon icon={faTimes}/></button>
+
+        <style jsx>{`
+        input {
+          width: calc(100% - 40px);
+          display: inline-block;
+          margin-top: 10px;
+        }
+        button {
+          margin-left: 10px;
+        }
+        `}
+        </style>
       </div>
     );
   }

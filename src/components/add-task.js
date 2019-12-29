@@ -7,7 +7,11 @@ import {saveTask} from '../store/actions';
 class AddTask extends Component {
   static propTypes = {
     dispatch: func.isRequired,
-    user: object.isRequired
+    user: object
+  }
+
+  static defaultProps = {
+    user: null
   }
 
   state = {
@@ -38,7 +42,7 @@ class AddTask extends Component {
   render() {
     return (
       <form onSubmit={this.handleAddTask}>
-        <input type="text" value={this.state.value} placeholder="add message..." onChange={this.handleValueChange}/>
+        <input type="text" value={this.state.value} className="form-control" placeholder="add message..." onChange={this.handleValueChange}/>
       </form>
     );
   }

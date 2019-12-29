@@ -1,27 +1,28 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {array, object} from 'prop-types';
+import {array, object, func} from 'prop-types';
 import Router from 'next/router';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 import Head from '../components/head';
-import LoginForm from '../components/login-form';
 import AddTask from '../components/add-task';
 import Task from '../components/task';
+import {makeLogout} from '../store/actions';
 
 class Index extends Component {
   static propTypes = {
+    dispatch: func.isRequired,
     user: object,
-    error: object,
     tasks: array
   };
 
   static defaultProps = {
     user: null,
-    error: null,
     tasks: null
   }
 
-  title = 'Home | Hubtec Tasks';
+  title = 'Hubtec Tasks';
   description = 'Hubtec tasks management app.';
 
   checkUser = () => {
@@ -38,26 +39,36 @@ class Index extends Component {
     this.checkUser();
   }
 
+  handleLogout = () => {
+    this.props.dispatch(makeLogout());
+  }
+
   render() {
-    const {tasks, error} = this.props;
+    const {tasks} = this.props;
 
     return (
-      <div className="container">
+      <div>
         <Head title={this.title} description={this.description}/>
-        <h1>{this.description}</h1>
 
-        <LoginForm/>
+        <nav className="navbar sticky-top navbar-dark bg-dark px-0 mb-3">
+          <div className="container">
+            <span className="navbar-brand mb-0 h1">{this.title}</span>
+            <button type="button" className="btn-ico text-danger" onClick={this.handleLogout}><FontAwesomeIcon icon={faSignOutAlt}/></button>
+          </div>
+        </nav>
 
-        <AddTask/>
+        <div className="container">
+          <AddTask/>
 
-        <ul>
-          {tasks &&
-            tasks.map(task => (
-              <li key={task.id}><Task task={task}/></li>
-            ))}
-        </ul>
+          <br/>
 
-        <pre>{JSON.stringify(error, null, 2) }</pre>
+          <ul className="list-unstyled">
+            {tasks &&
+              tasks.map(task => (
+                <li key={task.id}><Task task={task}/></li>
+              ))}
+          </ul>
+        </div>
       </div>
     );
   }

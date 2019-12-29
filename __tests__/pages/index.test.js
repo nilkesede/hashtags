@@ -6,7 +6,6 @@ import Router from 'next/router';
 
 import '../setup';
 import Index from '../../src/pages';
-import LoginForm from '../../src/components/login-form';
 
 Router.push = jest.fn();
 
@@ -28,11 +27,7 @@ describe('Index', () => {
     </Provider>);
 
   it('should show the app title', () => {
-    expect(wrapper.find('h1').text()).toEqual('Hubtec tasks management app.');
-  });
-
-  it('should show the login form', () => {
-    expect(wrapper.find(LoginForm).exists()).toBeTruthy();
+    expect(wrapper.find('.navbar-brand').text()).toEqual('Hubtec Tasks');
   });
 
   it('should show tasks list', () => {

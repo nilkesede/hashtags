@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {func, object} from 'prop-types';
+import {func} from 'prop-types';
 
-import {makeLogin, makeLogout} from '../store/actions';
+import {makeLogin} from '../store/actions';
 
 class LoginForm extends Component {
   static propTypes = {
-    dispatch: func.isRequired,
-    user: object
+    dispatch: func.isRequired
   };
-
-  static defaultProps = {
-    user: null
-  }
 
   state = {
     email: '',
@@ -29,34 +24,42 @@ class LoginForm extends Component {
     });
   }
 
-  handleLogin = () => {
+  handleLogin = event => {
+    event.preventDefault();
     this.props.dispatch(makeLogin(this.state.email, this.state.password));
   }
 
-  handleLogout = () => {
-    this.props.dispatch(makeLogout());
-  }
-
   render() {
-    const {user} = this.props;
-
     return (
-      <div>
-        {user ? (
-          <div>
-            {user.email}
-            <button type="button" onClick={this.handleLogout}>Logout</button>
-          </div>
-        ) : (
-          <div>
-            <input type="email" name="email" placeholder="email" value={this.state.email} onChange={this.handleInputChange}/>
-            <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleInputChange}/>
-            <button type="button" onClick={this.handleLogin}>Login/Register</button>
-          </div>
-        )}
-      </div>
+      <form className="form-signin" onSubmit={this.handleLogin}>
+        <div className="text-center mb-2">
+          <h1 className="h3 mb-3 font-weight-light">Hubtec Tasks</h1>
+        </div>
+
+        <div className="form-group">
+          <input required autoFocus className="form-control form-control-lg"
+            type="email" name="email" placeholder="Email address"
+            value={this.state.email} onChange={this.handleInputChange}/>
+        </div>
+
+        <div className="form-group">
+          <input required className="form-control form-control-lg"
+            type="password" name="password" placeholder="Password"
+            value={this.state.password} onChange={this.handleInputChange}/>
+        </div>
+
+        <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in/Register</button>
+
+        <style jsx>{`
+        .form-signin {
+          width: 100%;
+          max-width: 400px;
+          margin: auto;
+        }`}
+        </style>
+      </form>
     );
   }
 }
 
-export default connect(({user}) => ({user}))(LoginForm);
+export default connect()(LoginForm);
