@@ -37,13 +37,15 @@ class LoginForm extends Component {
         </div>
 
         <div className="form-group">
-          <input required autoFocus className="form-control form-control-lg"
+          <input
+            required autoFocus className="form-control form-control-lg"
             type="email" name="email" placeholder="Email address"
             value={this.state.email} onChange={this.handleInputChange}/>
         </div>
 
         <div className="form-group">
-          <input required className="form-control form-control-lg"
+          <input
+            required className="form-control form-control-lg"
             type="password" name="password" placeholder="Password"
             value={this.state.password} onChange={this.handleInputChange}/>
         </div>

@@ -52,7 +52,8 @@ class AddTask extends Component {
     return (
       <div className="row">
         <form className="col" onSubmit={this.handleAddTask}>
-          <input type="text" value={this.state.value} className="form-control"
+          <input
+            type="text" value={this.state.value} className="form-control"
             placeholder="add new task..." onChange={this.handleValueChange}/>
         </form>
         <div className="col-6 col-sm-5 px-0">
