@@ -33,7 +33,7 @@ class LoginForm extends Component {
     return (
       <form className="form-signin" onSubmit={this.handleLogin}>
         <div className="text-center mb-2">
-          <h1 className="h3 mb-3 font-weight-light">Hubtec Tasks</h1>
+          <h1 className="h3 mb-3 font-weight-light">Tasks</h1>
         </div>
 
         <div className="form-group">

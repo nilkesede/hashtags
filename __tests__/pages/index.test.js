@@ -27,7 +27,7 @@ describe('Index', () => {
     </Provider>);
 
   it('should show the app title', () => {
-    expect(wrapper.find('.navbar-brand').text()).toEqual('Hubtec Tasks');
+    expect(wrapper.find('.navbar-brand').text()).toEqual('Tasks');
   });
 
   it('should show tasks list', () => {

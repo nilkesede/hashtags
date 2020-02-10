@@ -16,8 +16,8 @@ class Login extends Component {
     user: null
   }
 
-  title = 'Login | Hubtec Tasks';
-  description = 'Hubtec tasks management app.';
+  title = 'Login | Tasks';
+  description = 'Tasks management app.';
 
   checkUser = () => {
     if (this.props.user) {

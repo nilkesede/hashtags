@@ -1,6 +1,6 @@
 {
-  "name": "Hubtec Tasks",
-  "short_name": "Hubtec Tasks",
+  "name": "Tasks",
+  "short_name": "Tasks",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",

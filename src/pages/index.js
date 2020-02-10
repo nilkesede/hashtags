@@ -22,8 +22,8 @@ class Index extends Component {
     tasks: null
   }
 
-  title = 'Hubtec Tasks';
-  description = 'Hubtec tasks management app.';
+  title = 'Tasks';
+  description = 'tasks management app.';
 
   checkUser = () => {
     if (!this.props.user) {

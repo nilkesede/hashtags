@@ -4,8 +4,8 @@ import {shallow} from 'enzyme';
 import '../setup';
 import Head from '../../src/components/head';
 
-const title = 'Hubtec Tasks';
-const description = 'Hubtec Tasks application!';
+const title = 'Tasks';
+const description = 'Tasks application!';
 
 describe('Head component', () => {
   const wrapper = shallow(<Head title={title} description={description}/>);

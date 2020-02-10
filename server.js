@@ -21,9 +21,9 @@ app.prepare().then(() => {
 
   server.use(bodyParser.json());
   server.use(session({
-    secret: 'hubtec-tasks',
+    secret: 'tasks',
     saveUninitialized: true,
-    store: new FileStore({secret: 'hubtec-tasks'}),
+    store: new FileStore({secret: 'tasks'}),
     resave: false,
     rolling: true,
     httpOnly: true,
