@@ -7,5 +7,8 @@ module.exports = {
   ],
   plugins: [
     'unicorn'
-  ]
+  ],
+  rules: {
+    semi: ['error', 'never']
+  }
 };
