@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import NextHead from 'next/head';
-import {string} from 'prop-types';
+import React, {Component} from 'react'
+import NextHead from 'next/head'
+import {string} from 'prop-types'
 
 export default class Head extends Component {
   static propTypes = {
@@ -13,7 +13,7 @@ export default class Head extends Component {
   };
 
   render() {
-    const {title, description} = this.props;
+    const {title, description} = this.props
 
     return (
       <NextHead>
@@ -27,6 +27,6 @@ export default class Head extends Component {
         <link rel="manifest" href="/manifest.json"/>
         <link rel="icon" href="/favicon.ico"/>
       </NextHead>
-    );
+    )
   }
 }

@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import flatpickr from 'flatpickr';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import {func, string} from 'prop-types';
+import React, {Component} from 'react'
+import flatpickr from 'flatpickr'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTimes} from '@fortawesome/free-solid-svg-icons'
+import {func, string} from 'prop-types'
 
 export default class Datepicker extends Component {
   static propTypes = {
@@ -25,7 +25,7 @@ export default class Datepicker extends Component {
   calendar = null;
 
   componentDidMount() {
-    const {defaultDate} = this.props;
+    const {defaultDate} = this.props
 
     this.calendar = flatpickr(this.datePicker.current, {
       wrap: true,
@@ -33,37 +33,37 @@ export default class Datepicker extends Component {
       defaultDate: new Date(defaultDate),
       dateFormat: 'F j, Y',
       onChange: this.onChange
-    });
+    })
 
     if (defaultDate) {
       this.setState({
         showClear: !this.calendar.isMobile
-      });
+      })
     }
   }
 
   onChange = (selectedDates, dateString, instance) => {
     this.setState({
       showClear: selectedDates.length > 0 && !instance.isMobile
-    });
-    this.props.onChange(selectedDates.length > 0 ? selectedDates[0].toString() : null);
+    })
+    this.props.onChange(selectedDates.length > 0 ? selectedDates[0].toString() : null)
   }
 
   onSubmit = event => {
     if (event.key === 'Enter') {
-      this.props.onSubmit(event);
+      this.props.onSubmit(event)
     }
   }
 
   clear = () => {
-    this.calendar.clear();
-    this.calendar.close();
+    this.calendar.clear()
+    this.calendar.close()
   }
 
   render() {
-    const {showClear} = this.state;
-    const inputClass = 'form-control ' + (showClear ? 'input-small' : '');
-    const clearClass = 'btn ' + (!showClear && 'd-none');
+    const {showClear} = this.state
+    const inputClass = 'form-control ' + (showClear ? 'input-small' : '')
+    const clearClass = 'btn ' + (!showClear && 'd-none')
 
     return (
       <div ref={this.datePicker}>
@@ -77,6 +77,6 @@ export default class Datepicker extends Component {
         `}
         </style>
       </div>
-    );
+    )
   }
 }

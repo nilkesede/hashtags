@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {func} from 'prop-types';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {func} from 'prop-types'
 
-import {makeLogin} from '../store/actions';
+import {makeLogin} from '../store/actions'
 
 class LoginForm extends Component {
   static propTypes = {
@@ -15,18 +15,18 @@ class LoginForm extends Component {
   };
 
   handleInputChange = event => {
-    const {target} = event;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const {name} = target;
+    const {target} = event
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    const {name} = target
 
     this.setState({
       [name]: value
-    });
+    })
   }
 
   handleLogin = event => {
-    event.preventDefault();
-    this.props.dispatch(makeLogin(this.state.email, this.state.password));
+    event.preventDefault()
+    this.props.dispatch(makeLogin(this.state.email, this.state.password))
   }
 
   render() {
@@ -60,8 +60,8 @@ class LoginForm extends Component {
         }`}
         </style>
       </form>
-    );
+    )
   }
 }
 
-export default connect()(LoginForm);
+export default connect()(LoginForm)

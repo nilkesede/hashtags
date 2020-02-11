@@ -1,16 +1,16 @@
-import React from 'react';
-import {mount} from 'enzyme';
-import {Provider} from 'react-redux';
-import configureStore from 'redux-mock-store';
-import Router from 'next/router';
+import React from 'react'
+import {mount} from 'enzyme'
+import {Provider} from 'react-redux'
+import configureStore from 'redux-mock-store'
+import Router from 'next/router'
 
-import '../setup';
-import Index from '../../src/pages';
+import '../setup'
+import Index from '../../src/pages'
 
-Router.push = jest.fn();
+Router.push = jest.fn()
 
 describe('Index', () => {
-  const mockStore = configureStore();
+  const mockStore = configureStore()
 
   const store = mockStore({
     error: null,
@@ -19,18 +19,18 @@ describe('Index', () => {
       email: 'nil@ksde.pw'
     },
     tasks: []
-  });
+  })
 
   const wrapper = mount(
     <Provider store={store}>
       <Index/>
-    </Provider>);
+    </Provider>)
 
   it('should show the app title', () => {
-    expect(wrapper.find('.navbar-brand').text()).toEqual('Hashtags');
-  });
+    expect(wrapper.find('.navbar-brand').text()).toEqual('Hashtags')
+  })
 
   it('should show hashtags list', () => {
-    expect(wrapper.find('ul').exists()).toBeTruthy();
-  });
-});
+    expect(wrapper.find('ul').exists()).toBeTruthy()
+  })
+})

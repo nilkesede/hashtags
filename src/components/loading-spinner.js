@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bool} from 'prop-types';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faCompactDisc} from '@fortawesome/free-solid-svg-icons';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {bool} from 'prop-types'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCompactDisc} from '@fortawesome/free-solid-svg-icons'
 
 class LoadingSpinner extends Component {
   static propTypes = {
@@ -10,7 +10,7 @@ class LoadingSpinner extends Component {
   };
 
   render() {
-    const {isLoading} = this.props;
+    const {isLoading} = this.props
 
     return isLoading && (
       <div className="wrapper">
@@ -36,8 +36,8 @@ class LoadingSpinner extends Component {
         `}
         </style>
       </div>
-    );
+    )
   }
 }
 
-export default connect(({isLoading}) => ({isLoading}))(LoadingSpinner);
+export default connect(({isLoading}) => ({isLoading}))(LoadingSpinner)

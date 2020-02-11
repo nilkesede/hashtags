@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {func, object} from 'prop-types';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
-import debounce from 'lodash.debounce';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {func, object} from 'prop-types'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTrash} from '@fortawesome/free-solid-svg-icons'
+import debounce from 'lodash.debounce'
 
-import {saveTask, updateTask} from '../store/actions';
-import Datepicker from './datepicker';
+import {saveTask, updateTask} from '../store/actions'
+import Datepicker from './datepicker'
 
 class Task extends Component {
   static propTypes = {
@@ -15,37 +15,37 @@ class Task extends Component {
   };
 
   delayedEditTask = debounce(function (task) {
-    this.props.dispatch(saveTask(task));
+    this.props.dispatch(saveTask(task))
   }, 500)
 
   handleEditTask = (event, task) => {
-    event.preventDefault();
+    event.preventDefault()
 
     const newTask = {
       ...task,
       text: event.target.value
-    };
+    }
 
-    this.props.dispatch(updateTask(newTask));
-    this.delayedEditTask(newTask);
+    this.props.dispatch(updateTask(newTask))
+    this.delayedEditTask(newTask)
   }
 
   handleDeleteTask = (event, task) => {
-    event.preventDefault();
+    event.preventDefault()
     this.props.dispatch(saveTask({
       ...task,
       delete: true
-    }));
+    }))
   }
 
   handleScheduleChange = date => {
-    const {task} = this.props;
-    task.schedule = date;
-    this.delayedEditTask(task);
+    const {task} = this.props
+    task.schedule = date
+    this.delayedEditTask(task)
   }
 
   render() {
-    const {task} = this.props;
+    const {task} = this.props
 
     return (
       <div className="row">
@@ -71,8 +71,8 @@ class Task extends Component {
         `}
         </style>
       </div>
-    );
+    )
   }
 }
 
-export default connect(state => state)(Task);
+export default connect(state => state)(Task)

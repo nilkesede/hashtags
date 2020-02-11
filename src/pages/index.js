@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {array, object, func} from 'prop-types';
-import Router from 'next/router';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {array, object, func} from 'prop-types'
+import Router from 'next/router'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 
-import Head from '../components/head';
-import AddTask from '../components/add-task';
-import Task from '../components/task';
-import {makeLogout} from '../store/actions';
+import Head from '../components/head'
+import AddTask from '../components/add-task'
+import Task from '../components/task'
+import {makeLogout} from '../store/actions'
 
 class Index extends Component {
   static propTypes = {
@@ -27,24 +27,24 @@ class Index extends Component {
 
   checkUser = () => {
     if (!this.props.user) {
-      Router.push('/login');
+      Router.push('/login')
     }
   }
 
   componentDidMount() {
-    this.checkUser();
+    this.checkUser()
   }
 
   componentDidUpdate() {
-    this.checkUser();
+    this.checkUser()
   }
 
   handleLogout = () => {
-    this.props.dispatch(makeLogout());
+    this.props.dispatch(makeLogout())
   }
 
   render() {
-    const {tasks} = this.props;
+    const {tasks} = this.props
 
     return (
       <div>
@@ -70,8 +70,8 @@ class Index extends Component {
           </ul>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default connect(state => state)(Index);
+export default connect(state => state)(Index)

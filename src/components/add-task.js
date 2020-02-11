@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {func, object} from 'prop-types';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {func, object} from 'prop-types'
 
-import {saveTask} from '../store/actions';
-import Datepicker from './datepicker';
+import {saveTask} from '../store/actions'
+import Datepicker from './datepicker'
 
 class AddTask extends Component {
   static propTypes = {
@@ -25,12 +25,12 @@ class AddTask extends Component {
   handleValueChange = event => {
     this.setState({
       value: event.target.value
-    });
+    })
   }
 
   handleAddTask = event => {
-    event.preventDefault();
-    const date = new Date().getTime();
+    event.preventDefault()
+    const date = new Date().getTime()
 
     this.props.dispatch(saveTask({
       id: date,
@@ -38,14 +38,14 @@ class AddTask extends Component {
       userId: this.props.user.uid,
       delete: false,
       schedule: this.scheduleDate
-    }));
+    }))
 
-    this.setState({value: ''});
-    this.datePicker.current.clear();
+    this.setState({value: ''})
+    this.datePicker.current.clear()
   }
 
   handleScheduleChange = date => {
-    this.scheduleDate = date;
+    this.scheduleDate = date
   }
 
   render() {
@@ -60,8 +60,8 @@ class AddTask extends Component {
           <Datepicker ref={this.datePicker} onChange={this.handleScheduleChange} onSubmit={this.handleAddTask}/>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default connect(({user}) => ({user}))(AddTask);
+export default connect(({user}) => ({user}))(AddTask)

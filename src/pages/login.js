@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {object} from 'prop-types';
-import Router from 'next/router';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {object} from 'prop-types'
+import Router from 'next/router'
 
-import Head from '../components/head';
-import LoginForm from '../components/login-form';
-import LoadingSpinner from '../components/loading-spinner';
+import Head from '../components/head'
+import LoginForm from '../components/login-form'
+import LoadingSpinner from '../components/loading-spinner'
 
 class Login extends Component {
   static propTypes = {
@@ -21,16 +21,16 @@ class Login extends Component {
 
   checkUser = () => {
     if (this.props.user) {
-      Router.push('/');
+      Router.push('/')
     }
   }
 
   componentDidMount() {
-    this.checkUser();
+    this.checkUser()
   }
 
   componentDidUpdate() {
-    this.checkUser();
+    this.checkUser()
   }
 
   render() {
@@ -63,8 +63,8 @@ class Login extends Component {
           }`}
         </style>
       </div>
-    );
+    )
   }
 }
 
-export default connect(({user}) => ({user}))(Login);
+export default connect(({user}) => ({user}))(Login)
