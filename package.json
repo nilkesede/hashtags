@@ -10,7 +10,7 @@
     "export": "next export",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test": "eslint src && eslint __tests__ && jest __tests__/**/*.test.js"
+    "test": "eslint . && jest __tests__/**/*.test.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.27",
