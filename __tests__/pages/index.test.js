@@ -27,10 +27,10 @@ describe('Index', () => {
     </Provider>);
 
   it('should show the app title', () => {
-    expect(wrapper.find('.navbar-brand').text()).toEqual('Tasks');
+    expect(wrapper.find('.navbar-brand').text()).toEqual('Hashtags');
   });
 
-  it('should show tasks list', () => {
+  it('should show hashtags list', () => {
     expect(wrapper.find('ul').exists()).toBeTruthy();
   });
 });

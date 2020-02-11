@@ -22,8 +22,8 @@ class Index extends Component {
     tasks: null
   }
 
-  title = 'Tasks';
-  description = 'tasks management app.';
+  title = 'Hashtags';
+  description = 'Hashtags management app.';
 
   checkUser = () => {
     if (!this.props.user) {

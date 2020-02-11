@@ -21,9 +21,9 @@ app.prepare().then(() => {
 
   server.use(bodyParser.json());
   server.use(session({
-    secret: 'tasks',
+    secret: 'hashtags',
     saveUninitialized: true,
-    store: new FileStore({secret: 'tasks'}),
+    store: new FileStore({secret: 'hashtags'}),
     resave: false,
     rolling: true,
     httpOnly: true,

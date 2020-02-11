@@ -1,6 +1,6 @@
 {
-  "name": "Tasks",
-  "short_name": "Tasks",
+  "name": "Hashtags",
+  "short_name": "Hashtags",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",

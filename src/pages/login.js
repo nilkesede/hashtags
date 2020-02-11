@@ -16,8 +16,8 @@ class Login extends Component {
     user: null
   }
 
-  title = 'Login | Tasks';
-  description = 'Tasks management app.';
+  title = 'Login | Hashtags';
+  description = 'Hashtags management app.';
 
   checkUser = () => {
     if (this.props.user) {
