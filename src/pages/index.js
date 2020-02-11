@@ -7,7 +7,7 @@ import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 
 import Head from '../components/Head'
 import AddTask from '../components/AddTask'
-import Task from '../components/task'
+import Task from '../components/Task'
 import {makeLogout} from '../store/actions'
 
 class Index extends Component {
