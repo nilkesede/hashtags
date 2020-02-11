@@ -3,12 +3,7 @@ import {storiesOf} from '@storybook/react'
 
 import Datepicker from '.'
 
-storiesOf('Datepicker', module)
-  .addDecorator(story => (
-    <div style={{padding: '15px'}}>
-      {story()}
-    </div>
-  ))
+storiesOf('UI|Datepicker/Datepicker', module)
   .add('default', () =>
     <Datepicker/>
   )

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {func} from 'prop-types'
 
-import {makeLogin} from '../store/actions'
+import {makeLogin} from '../../store/actions'
 
 class LoginForm extends Component {
   static propTypes = {

@@ -4,6 +4,7 @@ module.exports = {
     '@storybook/addon-links/register',
     '@storybook/addon-knobs/register',
     '@storybook/addon-viewport/register',
+    '@dump247/storybook-state/register',
     '@storybook/preset-scss'
   ]
 }

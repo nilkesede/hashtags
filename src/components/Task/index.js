@@ -5,8 +5,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrash} from '@fortawesome/free-solid-svg-icons'
 import debounce from 'lodash.debounce'
 
-import {saveTask, updateTask} from '../store/actions'
-import Datepicker from './_UI/Datepicker'
+import {saveTask, updateTask} from '../../store/actions'
+import Datepicker from '../_UI/Datepicker'
 
 class Task extends Component {
   static propTypes = {

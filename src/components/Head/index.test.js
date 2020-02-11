@@ -1,8 +1,10 @@
-import React from 'react'
+import Enzyme from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 import {shallow} from 'enzyme'
 
-import '../setup'
-import Head from '../../src/components/head'
+import Head from '.'
+
+Enzyme.configure({adapter: new Adapter()})
 
 const title = 'Hashtags'
 const description = 'Hashtags application!'

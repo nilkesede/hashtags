@@ -5,8 +5,8 @@ import Router from 'next/router'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 
-import Head from '../components/head'
-import AddTask from '../components/add-task'
+import Head from '../components/Head'
+import AddTask from '../components/AddTask'
 import Task from '../components/task'
 import {makeLogout} from '../store/actions'
 

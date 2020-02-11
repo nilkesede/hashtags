@@ -21,6 +21,12 @@ addDecorator(story => (
   </ThemeProvider>
 ))
 
+addDecorator(story => (
+  <div style={{padding: '15px'}}>
+    {story()}
+  </div>
+))
+
 const request = require.context('../src/components', true, /\.stories\.js$/)
 
 function loadStories() {

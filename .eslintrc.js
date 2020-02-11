@@ -10,6 +10,26 @@ module.exports = {
   ],
   rules: {
     semi: ['error', 'never'],
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    'unicorn/filename-case': [
+      'error',
+      {
+        cases: {
+          kebabCase: true,
+          camelCase: true,
+          snakeCase: false,
+          pascalCase: true
+        }
+      }
+    ],
+    'unicorn/prevent-abbreviations': [
+      'error',
+      {
+        whitelist: {
+          props: true,
+          mapStateToProps: true
+        }
+      }
+    ]
   }
-};
+}

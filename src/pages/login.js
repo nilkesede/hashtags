@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {object, bool} from 'prop-types'
 import Router from 'next/router'
 
-import Head from '../components/head'
-import LoginForm from '../components/login-form'
+import Head from '../components/Head'
+import LoginForm from '../components/LoginForm'
 import LoadingSpinner from '../components/_UI/LoadingSpinner'
 
 class Login extends Component {

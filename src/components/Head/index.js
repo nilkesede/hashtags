@@ -6,7 +6,7 @@ export default class Head extends Component {
   static propTypes = {
     title: string.isRequired,
     description: string
-  };
+  }
 
   static defaultProps = {
     description: ''
