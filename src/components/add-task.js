@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {func, object} from 'prop-types'
 
 import {saveTask} from '../store/actions'
-import Datepicker from './datepicker'
+import Datepicker from './_UI/Datepicker'
 
 class AddTask extends Component {
   static propTypes = {

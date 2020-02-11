@@ -1,19 +1,21 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {object} from 'prop-types'
+import {object, bool} from 'prop-types'
 import Router from 'next/router'
 
 import Head from '../components/head'
 import LoginForm from '../components/login-form'
-import LoadingSpinner from '../components/loading-spinner'
+import LoadingSpinner from '../components/_UI/LoadingSpinner'
 
 class Login extends Component {
   static propTypes = {
-    user: object
+    user: object,
+    isLoading: bool
   };
 
   static defaultProps = {
-    user: null
+    user: null,
+    isLoading: false
   }
 
   title = 'Login | Hashtags';
@@ -36,7 +38,7 @@ class Login extends Component {
   render() {
     return (
       <div className="wrapper">
-        <LoadingSpinner/>
+        <LoadingSpinner isLoading={this.props.isLoading}/>
 
         <div className="container-fluid">
           <Head title={this.title} description={this.description}/>
@@ -67,4 +69,4 @@ class Login extends Component {
   }
 }
 
-export default connect(({user}) => ({user}))(Login)
+export default connect(({user, isLoading}) => ({user, isLoading}))(Login)
