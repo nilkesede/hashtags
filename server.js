@@ -13,7 +13,7 @@ const app = next({dev: development})
 const handle = app.getRequestHandler()
 
 const firebase = admin.initializeApp({
-  credential: admin.credential.cert(require('./credentials/server'))
+  credential: admin.credential.cert(require('./config/credentials/server'))
 }, 'server')
 
 app.prepare().then(() => {

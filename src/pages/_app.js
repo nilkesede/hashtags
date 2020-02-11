@@ -4,6 +4,7 @@ import {Provider} from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 import {config as faConfig} from '@fortawesome/fontawesome-svg-core'
+import {ThemeProvider} from 'styled-components'
 
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import 'flatpickr/dist/flatpickr.css'
@@ -11,6 +12,7 @@ import '../styles/main.scss'
 
 import createStore from '../store'
 import {loadUserData, listenTasksON} from '../store/actions'
+import {theme} from '../../config'
 
 faConfig.autoAddCss = false
 
@@ -40,7 +42,9 @@ class MyApp extends App {
     const {Component, pageProps, store} = this.props
     return (
       <Provider store={store}>
-        <Component {...pageProps}/>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps}/>
+        </ThemeProvider>
       </Provider>
     )
   }

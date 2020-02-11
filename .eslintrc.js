@@ -9,6 +9,7 @@ module.exports = {
     'unicorn'
   ],
   rules: {
-    semi: ['error', 'never']
+    semi: ['error', 'never'],
+    'react/react-in-jsx-scope': 'off'
   }
 };

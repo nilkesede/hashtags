@@ -4,7 +4,7 @@ import firebase from 'firebase/app'
 
 import rootReducer, {defaultState} from './reducer'
 import rootSaga from './saga'
-import clientCredentials from '../../credentials/client'
+import clientCredentials from '../../config/credentials/client'
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp(clientCredentials)

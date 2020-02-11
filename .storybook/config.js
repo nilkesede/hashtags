@@ -1,5 +1,8 @@
-import { configure, addDecorator } from '@storybook/react'
+import {configure, addDecorator} from '@storybook/react'
 import Router from 'next/router'
+import {ThemeProvider} from 'styled-components'
+
+import {theme} from '../config'
 
 import 'flatpickr/dist/flatpickr.css'
 import '../src/styles/main.scss'
@@ -7,15 +10,21 @@ import '../src/styles/main.scss'
 const mockedRouter = {
   push: () => Promise.resolve(),
   replace: () => Promise.resolve(),
-  prefetch: () => {},
+  prefetch: () => {}
 }
 
 Router.router = mockedRouter
 
-const req = require.context('../src/components', true, /\.stories\.js$/)
+addDecorator(story => (
+  <ThemeProvider theme={theme}>
+    {story()}
+  </ThemeProvider>
+))
+
+const request = require.context('../src/components', true, /\.stories\.js$/)
 
 function loadStories() {
-  req.keys().forEach(filename => req(filename))
+  request.keys().forEach(filename => request(filename))
 }
 
 configure(loadStories, module)

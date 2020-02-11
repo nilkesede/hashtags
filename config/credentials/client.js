@@ -1,7 +1,7 @@
 try {
-  const buff = Buffer.from(process.env.CLIENT_CREDENTIALS, 'base64');
-  const text = buff.toString('ascii');
-  module.exports = JSON.parse(text);
+  const buff = Buffer.from(process.env.CLIENT_CREDENTIALS, 'base64')
+  const text = buff.toString('ascii')
+  module.exports = JSON.parse(text)
 } catch (_) {
   module.exports = {
     apiKey: '',
@@ -11,5 +11,5 @@ try {
     storageBucket: '',
     messagingSenderId: '',
     appId: ''
-  };
+  }
 }
