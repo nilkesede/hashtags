@@ -7,6 +7,7 @@ import {config as faConfig} from '@fortawesome/fontawesome-svg-core';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'flatpickr/dist/flatpickr.css';
+import '../styles/main.scss';
 
 import createStore from '../store';
 import {loadUserData, listenTasksON} from '../store/actions';
