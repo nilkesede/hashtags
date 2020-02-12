@@ -1,30 +1,26 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 
-import {saveTask} from '../../store/actions'
+import {saveTag} from '../../store/actions'
 
 const mapStateToProps = ({user}) => ({user})
 
 export default Component => connect(mapStateToProps)(props => {
   const [value, setValue] = useState('')
-  const [scheduleDate, setScheduleDate] = useState(null)
 
   const {dispatch, user} = props
-  const datePicker = React.createRef()
 
-  const handleAddTask = () => {
+  const handleAddTag = () => {
     const date = new Date().getTime()
 
-    dispatch(saveTask({
+    dispatch(saveTag({
       id: date,
       text: value,
       userId: user.uid,
-      delete: false,
-      schedule: scheduleDate
+      delete: false
     }))
 
     setValue('')
-    datePicker.current.clear()
   }
 
   const handleValueChange = event => {
@@ -34,10 +30,8 @@ export default Component => connect(mapStateToProps)(props => {
   return (
     <Component
       value={value}
-      datePicker={datePicker}
-      handleAddTask={handleAddTask}
+      handleAddTag={handleAddTag}
       handleValueChange={handleValueChange}
-      handleScheduleChange={setScheduleDate}
       {...props}
     />
   )

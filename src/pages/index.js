@@ -6,20 +6,20 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons'
 
 import Head from '../components/Head'
-import AddTask from '../components/AddTask'
-import Task from '../components/Task'
+import AddTag from '../components/AddTag'
+import Tag from '../components/Tag'
 import {makeLogout} from '../store/actions'
 
 class Index extends Component {
   static propTypes = {
     dispatch: func.isRequired,
     user: object,
-    tasks: array
+    tags: array
   };
 
   static defaultProps = {
     user: null,
-    tasks: null
+    tags: null
   }
 
   title = 'Hashtags';
@@ -44,7 +44,7 @@ class Index extends Component {
   }
 
   render() {
-    const {tasks} = this.props
+    const {tags} = this.props
 
     return (
       <div>
@@ -58,14 +58,14 @@ class Index extends Component {
         </nav>
 
         <div className="container">
-          <AddTask/>
+          <AddTag/>
 
           <br/><br/>
 
           <ul className="list-unstyled">
-            {tasks &&
-              tasks.map(task => (
-                <li key={task.id}><Task task={task}/></li>
+            {tags &&
+              tags.map(tag => (
+                <li key={tag.id}><Tag tag={tag}/></li>
               ))}
           </ul>
         </div>

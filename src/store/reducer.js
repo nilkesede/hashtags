@@ -3,7 +3,7 @@ import {actionTypes} from './actions'
 export const defaultState = {
   error: null,
   user: null,
-  tasks: null,
+  tags: null,
   isLoading: false
 }
 
@@ -27,27 +27,27 @@ function reducer(state = defaultState, action = null) {
         ...{user: null}
       }
 
-    case actionTypes.LOAD_USER_TASKS:
+    case actionTypes.LOAD_USER_TAGS:
       return {
         ...state,
-        ...{tasks: action.data}
+        ...{tags: action.data}
       }
 
-    case actionTypes.UNLOAD_USER_TASKS:
+    case actionTypes.UNLOAD_USER_TAGS:
       return {
         ...state,
-        ...{tasks: null}
+        ...{tags: null}
       }
 
-    case actionTypes.UPDATE_TASK:
+    case actionTypes.UPDATE_TAG:
       return {
         ...state,
-        ...{tasks: state.tasks.map(task => {
-          if (task.id === action.task.id) {
-            return action.task
+        ...{tags: state.tags.map(tag => {
+          if (tag.id === action.tag.id) {
+            return action.tag
           }
 
-          return task
+          return tag
         })}
       }
 

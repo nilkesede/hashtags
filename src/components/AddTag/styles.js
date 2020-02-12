@@ -9,7 +9,3 @@ export const Form = styled.form.attrs({
 })``
 
 export const Input = styled.input``
-
-export const DateWrapper = styled.div.attrs({
-  className: 'col-6 col-sm-5 px-0'
-})``

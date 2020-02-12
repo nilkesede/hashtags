@@ -10,10 +10,10 @@ import {
   failure,
   loadUserData,
   unloadUserData,
-  loadUserTasks,
-  unloadUserTasks,
-  listenTasksON,
-  listenTasksOFF,
+  loadUserTags,
+  unloadUserTags,
+  listenTagsON,
+  listenTagsOFF,
   startLoading,
   stopLoading
 } from './actions'
@@ -33,7 +33,7 @@ function * createOrLoginUser({email, password}, login = false) {
   }
 
   yield put(loadUserData(userData))
-  yield put(listenTasksON())
+  yield put(listenTagsON())
 }
 
 function * makeLogin(payload) {
@@ -61,7 +61,7 @@ function * makeLogout() {
     yield firebase.auth().signOut()
     yield post('/api/logout')
     yield put(unloadUserData())
-    yield put(listenTasksOFF())
+    yield put(listenTagsOFF())
   } catch (error) {
     yield put(failure(error))
   } finally {
@@ -81,22 +81,22 @@ function * addDatabaseListener() {
     channelDB = new EventChannel(emiter => {
       const database = firebase.firestore()
 
-      return database.collection('tasks').onSnapshot(
+      return database.collection('tags').onSnapshot(
         snapshot => {
-          const tasks = []
+          const tags = []
 
           snapshot.forEach(document_ => {
-            const task = document_.data()
+            const tag = document_.data()
 
-            if (task.userId === user.uid && !task.delete) {
-              tasks.push(task)
+            if (tag.userId === user.uid && !tag.delete) {
+              tags.push(tag)
             }
 
-            tasks.sort(sortByIdDesc)
+            tags.sort(sortByIdDesc)
           })
 
-          if (tasks) {
-            emiter(tasks)
+          if (tags) {
+            emiter(tags)
           }
         },
         error => {
@@ -106,8 +106,8 @@ function * addDatabaseListener() {
     })
 
     while (true) {
-      const tasks = yield take(channelDB)
-      yield put(loadUserTasks(tasks))
+      const tags = yield take(channelDB)
+      yield put(loadUserTags(tags))
       yield delay(500)
     }
   } catch (error) {
@@ -119,19 +119,19 @@ function * removeDatabaseListener() {
   if (channelDB) {
     try {
       yield channelDB.close()
-      yield put(unloadUserTasks())
+      yield put(unloadUserTags())
     } catch (error) {
       yield put(failure(error))
     }
   }
 }
 
-function * saveTaskOnDatabase({task}) {
+function * saveTagOnDatabase({tag}) {
   try {
     const database = firebase.firestore()
-    yield database.collection('tasks')
-      .doc(`${task.id}`)
-      .set(task)
+    yield database.collection('tags')
+      .doc(`${tag.id}`)
+      .set(tag)
   } catch (error) {
     yield put(failure(error))
   }
@@ -141,9 +141,9 @@ function * rootSaga() {
   yield all([
     takeLatest(actionTypes.MAKE_LOGIN, makeLogin),
     takeLatest(actionTypes.MAKE_LOGOUT, makeLogout),
-    takeLatest(actionTypes.LISTEN_TASKS_ON, addDatabaseListener),
-    takeLatest(actionTypes.LISTEN_TASKS_OFF, removeDatabaseListener),
-    takeEvery(actionTypes.SAVE_TASK, saveTaskOnDatabase)
+    takeLatest(actionTypes.LISTEN_TAGS_ON, addDatabaseListener),
+    takeLatest(actionTypes.LISTEN_TAGS_OFF, removeDatabaseListener),
+    takeEvery(actionTypes.SAVE_TAG, saveTagOnDatabase)
   ])
 }
 

@@ -4,11 +4,11 @@ import {mount} from 'enzyme'
 import {Provider} from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import Task from '.'
+import AddTag from '.'
 
 Enzyme.configure({adapter: new Adapter()})
 
-describe('Task component', () => {
+describe('AddTag component', () => {
   const mockStore = configureStore()
 
   const store = mockStore({
@@ -17,25 +17,15 @@ describe('Task component', () => {
       uid: 11,
       email: 'nil@ksde.pw'
     },
-    tasks: []
+    tags: []
   })
-
-  const task = {
-    id: 11,
-    text: 'task',
-    userId: 11
-  }
 
   const wrapper = mount(
     <Provider store={store}>
-      <Task task={task}/>
+      <AddTag/>
     </Provider>)
 
-  it('should have a text input', () => {
-    expect(wrapper.find('input[type="text"]').exists()).toBeTruthy()
-  })
-
-  it('should have a button', () => {
-    expect(wrapper.find('button').exists()).toBeTruthy()
+  it('should have a form with one text input', () => {
+    expect(wrapper.find('form input').exists()).toBeTruthy()
   })
 })

@@ -11,7 +11,7 @@ import 'flatpickr/dist/flatpickr.css'
 import '../styles/main.scss'
 
 import createStore from '../store'
-import {loadUserData, listenTasksON} from '../store/actions'
+import {loadUserData, listenTagsON} from '../store/actions'
 import {theme} from '../../config'
 
 faConfig.autoAddCss = false
@@ -34,7 +34,7 @@ class MyApp extends App {
 
   componentDidMount() {
     if (this.props.store.getState().user) {
-      this.props.store.dispatch(listenTasksON())
+      this.props.store.dispatch(listenTagsON())
     }
   }
 

@@ -3,20 +3,16 @@ import {storiesOf} from '@storybook/react'
 import {action} from '@storybook/addon-actions'
 import {withState} from '@dump247/storybook-state'
 
-import {AddTask} from '.'
+import {AddTag} from '.'
 
-const datePicker = React.createRef()
-
-storiesOf('Home|AddTask', module)
+storiesOf('Home|AddTag', module)
   .add('default', withState({value: ''})(({store}) => (
-    <AddTask
+    <AddTag
       {...store.state}
-      datePicker={datePicker}
-      handleAddTask={action('add-task')}
+      handleAddTag={action('add-tag')}
       handleValueChange={event => {
         store.set({value: event.target.value})
         action('value-change')(event)
       }}
-      handleScheduleChange={action('schedule-change')}
     />
   )))
