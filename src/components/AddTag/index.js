@@ -1,29 +1,23 @@
 import {func, string} from 'prop-types'
 
+import {TextBox} from '../Input'
 import withLogic from './withLogic'
-import {Wrapper, Form, Input} from './styles'
 
-const AddTag = ({value, handleAddTag, handleValueChange}) => {
-  const onSubmit = event => {
-    event.preventDefault()
-    handleAddTag(event)
-  }
+const AddTag = ({value, onSubmit, onChange}) => (
+  <form onSubmit={onSubmit}>
+    <input type="submit" tabIndex="-1" style={{display: 'none'}}/>{/* hack to submit on enter */}
 
-  return (
-    <Wrapper>
-      <Form onSubmit={onSubmit}>
-        <Input
-          value={value} className="form-control"
-          placeholder="add new tag..." onChange={handleValueChange}/>
-      </Form>
-    </Wrapper>
-  )
-}
+    <TextBox
+      value={value}
+      placeholder="add new tag..."
+      onChange={onChange}/>
+  </form>
+)
 
 AddTag.propTypes = {
   value: string.isRequired,
-  handleAddTag: func.isRequired,
-  handleValueChange: func.isRequired
+  onChange: func.isRequired,
+  onSubmit: func.isRequired
 }
 
 export {AddTag}

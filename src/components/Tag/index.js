@@ -1,73 +1,23 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {func, object} from 'prop-types'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faTrash} from '@fortawesome/free-solid-svg-icons'
-import debounce from 'lodash.debounce'
+import {object, func} from 'prop-types'
 
-import {saveTag, updateTag} from '../../store/actions'
+import withLogic from './withLogic'
+import TextBox from '../Input'
+import Button from '../Button'
+import Text from '../Text'
 
-class Tag extends Component {
-  static propTypes = {
-    tag: object.isRequired,
-    dispatch: func.isRequired
-  };
+const Tag = ({tag, onChange, onDelete}) => (
+  <>
+    <TextBox value={tag.text} onChange={event => onChange(event, tag)}/>
+    <Button isBlock isBig onClick={event => onDelete(event, tag)}><Text>delete</Text></Button>
+  </>
+)
 
-  delayedEditTag = debounce(function (tag) {
-    this.props.dispatch(saveTag(tag))
-  }, 500)
-
-  handleEditTag = (event, tag) => {
-    event.preventDefault()
-
-    const newTag = {
-      ...tag,
-      text: event.target.value
-    }
-
-    this.props.dispatch(updateTag(newTag))
-    this.delayedEditTag(newTag)
-  }
-
-  handleDeleteTag = (event, tag) => {
-    event.preventDefault()
-    this.props.dispatch(saveTag({
-      ...tag,
-      delete: true
-    }))
-  }
-
-  handleScheduleChange = date => {
-    const {tag} = this.props
-    tag.schedule = date
-    this.delayedEditTag(tag)
-  }
-
-  render() {
-    const {tag} = this.props
-
-    return (
-      <div className="row">
-        <div className="col">
-          <input type="text" value={tag.text} className="form-control" onChange={event => this.handleEditTag(event, tag)}/>
-        </div>
-
-        <div className="col-auto px-0">
-          <button type="button" className="btn text-muted" title="delete tag" onClick={event => this.handleDeleteTag(event, tag)}><FontAwesomeIcon icon={faTrash}/></button>
-        </div>
-
-        <style jsx>{`
-        .row {
-          margin-top: 15px;
-        }
-        button {
-          margin-left: 10px;
-        }
-        `}
-        </style>
-      </div>
-    )
-  }
+Tag.propTypes = {
+  tag: object.isRequired,
+  onChange: func.isRequired,
+  onDelete: func.isRequired
 }
 
-export default connect(state => state)(Tag)
+export {Tag}
+
+export default withLogic(Tag)
