@@ -6,9 +6,9 @@ import {saveTag, updateTag} from '../../../store/actions'
 
 const withLogic = Component => connect()(({tag, dispatch}) => {
   // eslint-disable-next-line prefer-arrow-callback
-  const delayedSaveTag = debounce(function (tag) {
+  const delayedSaveTag = useCallback(debounce(function (tag) {
     dispatch(saveTag(tag))
-  }, 500)
+  }, 500), [dispatch, saveTag])
 
   const onChange = useCallback((event, tag) => {
     event.preventDefault()
