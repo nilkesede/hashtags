@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {constants} from '../../config'
 import Head from '../components/Head'
 import Navbar from '../containers/Navbar'
+import TagsContainer from '../containers/Tags'
 import withAuthCheck from '../lib/withAuthCheck'
 
 const Tags = () => {
@@ -13,6 +14,7 @@ const Tags = () => {
     <>
       <Head title={title} description={appDescription}/>
       <Navbar/>
+      <TagsContainer/>
     </>
   )
 }
