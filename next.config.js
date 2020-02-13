@@ -1,6 +1,5 @@
 const withOffline = require('next-offline')
 const withSass = require('@zeit/next-sass')
-const withCss = require('@zeit/next-css')
 
 const nextConfig = {
   env: {CLIENT_CREDENTIALS: process.env.CLIENT_CREDENTIALS},
@@ -28,4 +27,4 @@ const nextConfig = {
   }
 }
 
-module.exports = withCss(withSass(withOffline(nextConfig)))
+module.exports = withSass(withOffline(nextConfig))

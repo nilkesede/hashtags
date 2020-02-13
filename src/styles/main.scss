@@ -1,5 +1,5 @@
 @import "variables";
-@import "~bootstrap/scss/bootstrap";
+@import "normalize";
 @import url('https://fonts.googleapis.com/css?family=Nunito:300,400,700&display=swap');
 
 *,
@@ -10,11 +10,16 @@
 
 html, body {
   width: 100%;
+  margin: 0;
   position: relative;
 }
 
-.form-control {
-  border-top: none;
-  border-left: none;
-  border-right: none;
+body {
+  font-weight: $font-weight;
+  font-family: $font-family;
+  font-size: $font-size;
+}
+
+a {
+  text-decoration: none;
 }

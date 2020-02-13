@@ -4,7 +4,6 @@ import {ThemeProvider} from 'styled-components'
 
 import {theme} from '../config'
 
-import 'flatpickr/dist/flatpickr.css'
 import '../src/styles/main.scss'
 
 const mockedRouter = {
@@ -19,12 +18,6 @@ addDecorator(story => (
   <ThemeProvider theme={theme}>
     {story()}
   </ThemeProvider>
-))
-
-addDecorator(story => (
-  <div style={{padding: '15px'}}>
-    {story()}
-  </div>
 ))
 
 const request = require.context('../src/components', true, /\.stories\.js$/)

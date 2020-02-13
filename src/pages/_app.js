@@ -1,27 +1,21 @@
 import App from 'next/app'
-import React from 'react'
 import {Provider} from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
-import {config as faConfig} from '@fortawesome/fontawesome-svg-core'
 import {ThemeProvider} from 'styled-components'
 
-import '@fortawesome/fontawesome-svg-core/styles.css'
-import 'flatpickr/dist/flatpickr.css'
 import '../styles/main.scss'
 
 import createStore from '../store'
 import {loadUserData, listenTagsON} from '../store/actions'
 import {theme} from '../../config'
 
-faConfig.autoAddCss = false
-
 class MyApp extends App {
   static async getInitialProps({Component, ctx}) {
-    let pageProperties = {}
+    let pageProps = {}
 
     if (Component.getInitialProps) {
-      pageProperties = await Component.getInitialProps({ctx})
+      pageProps = await Component.getInitialProps({ctx})
     }
 
     const user = ctx.req && ctx.req.session ? ctx.req.session.user : null
@@ -29,7 +23,7 @@ class MyApp extends App {
       ctx.store.dispatch(loadUserData(user))
     }
 
-    return {pageProps: pageProperties}
+    return {pageProps}
   }
 
   componentDidMount() {

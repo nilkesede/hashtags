@@ -22,14 +22,6 @@ module.exports = {
         }
       }
     ],
-    'unicorn/prevent-abbreviations': [
-      'error',
-      {
-        whitelist: {
-          props: true,
-          mapStateToProps: true
-        }
-      }
-    ]
+    'unicorn/prevent-abbreviations': 'off'
   }
 }
