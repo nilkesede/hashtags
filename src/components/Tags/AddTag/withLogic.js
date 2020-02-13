@@ -7,7 +7,7 @@ const mapStateToProps = ({user}) => ({user})
 
 const withLogic = Component => connect(mapStateToProps)(props => {
   const [value, setValue] = useState('')
-  const {dispatch, user} = props
+  const {dispatch, user, ...restProps} = props
 
   const onSubmit = event => {
     event.preventDefault()
@@ -33,7 +33,7 @@ const withLogic = Component => connect(mapStateToProps)(props => {
       value={value}
       onSubmit={onSubmit}
       onChange={onChange}
-      {...props}
+      {...restProps}
     />
   )
 })

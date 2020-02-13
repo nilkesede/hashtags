@@ -3,8 +3,8 @@ import {func, string} from 'prop-types'
 import {TextBox} from '../../Input'
 import withLogic from './withLogic'
 
-const AddTag = ({value, onSubmit, onChange}) => (
-  <form onSubmit={onSubmit}>
+const AddTag = ({value, onSubmit, onChange, ...restProps}) => (
+  <form {...restProps} onSubmit={onSubmit}>
     <input type="submit" tabIndex="-1" style={{display: 'none'}}/>{/* hack to submit on enter */}
 
     <TextBox
