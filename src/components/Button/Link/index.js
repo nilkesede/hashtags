@@ -9,6 +9,7 @@ export const Anchor = styled(Text).attrs({
 })`
   color: ${props => props.theme.colors[props.color] || props.theme.colors.primaryColor};
   cursor: pointer;
+  transition: color .2s;
 
   &:hover {
     color: ${props => props.theme.colors[props.hoverColor || 'gray']};

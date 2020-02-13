@@ -18,7 +18,8 @@ export const Container = styled(UnstyledContainer)`
 `
 
 export const NavBrand = styled(Link).attrs({
-  type: 'header'
+  type: 'header',
+  hoverColor: 'lightGray'
 })`
   font-size: 1.5em;
   color: ${props => props.theme.colors.white}
