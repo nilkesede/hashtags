@@ -11,9 +11,9 @@ storiesOf('UI|Navbar/Navbar', module)
       title={text('title', 'Lorem')}
       handleLogout={action('logout')}
     >
-      <a href="#" style={{padding: '0 10px', color: 'white'}}>Link</a>
-      <a href="#" style={{padding: '0 10px', color: 'white'}}>Link</a>
-      <a href="#" style={{padding: '0 10px', color: 'white'}}>Link</a>
-      <a href="#" style={{padding: '0 10px', color: 'white'}}>Link</a>
+      <a href="#/" style={{padding: '0 10px', color: 'white'}}>Link</a>
+      <a href="#/" style={{padding: '0 10px', color: 'white'}}>Link</a>
+      <a href="#/" style={{padding: '0 10px', color: 'white'}}>Link</a>
+      <a href="#/" style={{padding: '0 10px', color: 'white'}}>Link</a>
     </Navbar>
   ))

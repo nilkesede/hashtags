@@ -20,7 +20,7 @@ addDecorator(story => (
   </ThemeProvider>
 ))
 
-const request = require.context('../src/components', true, /\.stories\.js$/)
+const request = require.context('../src', true, /\.stories\.js$/)
 
 function loadStories() {
   request.keys().forEach(filename => request(filename))

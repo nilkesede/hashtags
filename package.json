@@ -10,7 +10,7 @@
     "export": "next export",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test": "eslint . && jest"
+    "test": "eslint . && jest --passWithNoTests"
   },
   "dependencies": {
     "@zeit/next-sass": "1.0.1",

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {func, object} from 'prop-types'
 import debounce from 'lodash.debounce'
 
-import {saveTag, updateTag} from '../../../store/actions'
+import {saveTag, updateTag} from '../../store/actions'
 
 class Tag extends Component {
   static propTypes = {
