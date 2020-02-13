@@ -3,7 +3,7 @@ import {actionTypes} from './actions'
 export const defaultState = {
   error: null,
   user: null,
-  tags: null,
+  tags: [],
   isLoading: false
 }
 

@@ -5,6 +5,7 @@ module.exports = {
     '@storybook/addon-knobs/register',
     '@storybook/addon-viewport/register',
     '@dump247/storybook-state/register',
-    '@storybook/preset-scss'
+    '@storybook/preset-scss',
+    'addon-redux/register'
   ]
 }

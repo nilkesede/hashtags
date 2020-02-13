@@ -2,7 +2,7 @@ import {useCallback} from 'react'
 import {connect} from 'react-redux'
 import debounce from 'lodash.debounce'
 
-import {saveTag, updateTag} from '../../store/actions'
+import {saveTag, updateTag} from '../../../store/actions'
 
 const withLogic = Component => connect()(({tag, dispatch}) => {
   // eslint-disable-next-line prefer-arrow-callback

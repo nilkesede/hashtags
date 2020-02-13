@@ -1,6 +1,7 @@
-import {applyMiddleware, createStore} from 'redux'
+import {applyMiddleware, createStore, compose} from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import firebase from 'firebase/app'
+import withReduxEnhancer from 'addon-redux/enhancer'
 
 import rootReducer, {defaultState} from './reducer'
 import rootSaga from './saga'
@@ -19,12 +20,24 @@ const bindMiddleware = middleware => {
   return applyMiddleware(...middleware)
 }
 
+const createEnhancer = middleware => {
+  const enhancers = []
+  enhancers.push(bindMiddleware([middleware]))
+
+  if (process.env.NODE_ENV !== 'production') {
+    enhancers.push(withReduxEnhancer)
+  }
+
+  return compose(...enhancers)
+}
+
 function configureStore(initialState = defaultState) {
   const sagaMiddleware = createSagaMiddleware()
+
   const store = createStore(
     rootReducer,
     initialState,
-    bindMiddleware([sagaMiddleware])
+    createEnhancer(sagaMiddleware)
   )
 
   store.sagaTask = sagaMiddleware.run(rootSaga)

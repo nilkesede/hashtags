@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {connect} from 'react-redux'
 
-import {saveTag} from '../../store/actions'
+import {saveTag} from '../../../store/actions'
 
 const mapStateToProps = ({user}) => ({user})
 

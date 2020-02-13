@@ -1,6 +1,6 @@
 import {func, string} from 'prop-types'
 
-import {TextBox} from '../Input'
+import {TextBox} from '../../Input'
 import withLogic from './withLogic'
 
 const AddTag = ({value, onSubmit, onChange}) => (
