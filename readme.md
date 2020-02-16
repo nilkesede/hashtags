@@ -1,9 +1,6 @@
 # Hashtags [![Build Status](https://img.shields.io/travis/nilkesede/hashtags?style=flat-square)](https://travis-ci.org/nilkesede/hashtags)
 
-I've chosen to use Next.JS as front-end framework, with an NodeJS backend wired to the Firebase Firestore service.
-The NextJS has a whole bunch of nice features out of the box like server-side rendering, prefetching, automatic code splitting etc. Firestore is a secure NoSQL database in the cloud with realtime data update.
-
-### Set up firebase:
+### Set up
 - Create a project at the [Firebase console](https://console.firebase.google.com/).
 - Get your account credentials from the Firebase console at _project settings>service accounts_, where you can click on _generate new private key_ and download the credentials as a json file. It will contain keys such as `project_id`, `client_email` and `client_id`. Now copy them into your project in the `credentials/server.js` file.
 - Get your authentication credentials from the Firebase console under _project settings>general>your apps_ Add a new web app if you don't already have one. Under _Firebase SDK snippet_ choose _Config_ to get the configuration as JSON. It will include keys like `apiKey`, `authDomain` and `databaseUrl` and it goes into your project in `credentials/client.js`.
@@ -21,13 +18,10 @@ service cloud.firestore {
 }
 ```
 
-### Install it and run:
+### Run
 ```bash
 npm install
 npm run dev
-# or
-yarn
-yarn dev
 ```
 
 ### License
