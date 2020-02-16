@@ -60,8 +60,9 @@ function * makeLogout() {
     yield put(startLoading())
     yield firebase.auth().signOut()
     yield post('/api/logout')
-    yield put(unloadUserData())
     yield put(listenTagsOFF())
+    yield put(unloadUserData())
+    yield put(unloadUserTags())
   } catch (error) {
     yield put(failure(error))
   } finally {
@@ -119,7 +120,7 @@ function * removeDatabaseListener() {
   if (channelDB) {
     try {
       yield channelDB.close()
-      yield put(unloadUserTags())
+      channelDB = null
     } catch (error) {
       yield put(failure(error))
     }

@@ -24,7 +24,7 @@ function reducer(state = defaultState, action = null) {
     case actionTypes.UNLOAD_USER_DATA:
       return {
         ...state,
-        ...{user: null}
+        ...{user: defaultState.user}
       }
 
     case actionTypes.LOAD_USER_TAGS:
@@ -36,7 +36,7 @@ function reducer(state = defaultState, action = null) {
     case actionTypes.UNLOAD_USER_TAGS:
       return {
         ...state,
-        ...{tags: null}
+        ...{tags: defaultState.tags}
       }
 
     case actionTypes.UPDATE_TAG:
