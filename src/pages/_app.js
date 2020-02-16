@@ -27,7 +27,9 @@ class MyApp extends App {
   }
 
   componentDidMount() {
-    this.props.store.dispatch(listenTagsON())
+    if (this.props.store.getState().user) {
+      this.props.store.dispatch(listenTagsON())
+    }
   }
 
   componentWillUnmount() {

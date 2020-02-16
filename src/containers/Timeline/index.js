@@ -1,37 +1,59 @@
-import {useEffect} from 'react'
-import {arrayOf, object, func} from 'prop-types'
-import {connect} from 'react-redux'
+import {arrayOf, object, bool, func} from 'prop-types'
 import styled from 'styled-components'
 
-import {listenTweetsON, listenTweetsOFF} from '../../store/actions'
+import withLogic from './withLogic'
 import {Container as UnstyledContainer} from '../../components/Wrapper'
-import {TweetList} from '../../components/Tweets'
+import {TweetList as UnstyledTweetList} from '../../components/Tweets'
+import Badge from '../../components/Badge'
+import {Text} from '../../components/Text'
 
 const Container = styled(UnstyledContainer)`
   margin-top: 15px;
+  min-height: 100vh
 `
 
-const Timeline = ({dispatch, tweets, tags}) => {
-  useEffect(() => {
-    dispatch(listenTweetsON())
+const TermList = styled.div`
+  margin-bottom: 15px
+`
 
-    return () => {
-      dispatch(listenTweetsOFF())
-    }
-  }, [dispatch, tags])
+const Term = styled(Badge)`
+  margin-right: 5px;
+  cursor: pointer;
+`
 
+const TweetList = styled(UnstyledTweetList)`
+  height: 100vh;
+  overflow: auto;
+`
+
+const Timeline = ({tweets, terms, isAll, setActiveTag}) => {
   return (
     <Container>
-      <TweetList tweets={tweets}/>
+      <TermList>
+        <Term text="All" isActive={isAll} onClick={() => setActiveTag(0)}/>
+        {terms.map(t => (
+          <Term
+            key={t.id}
+            text={t.text}
+            isActive={t.active}
+            onClick={() => setActiveTag(t.id)}/>
+        ))}
+      </TermList>
+
+      {tweets.length === 0 ? (
+        <Text>no tweets yet</Text>
+      ) : (
+        <TweetList tweets={tweets}/>
+      )}
     </Container>
   )
 }
 
 Timeline.propTypes = {
-  dispatch: func.isRequired,
   tweets: arrayOf(object),
-  tags: arrayOf(object)
+  terms: arrayOf(object),
+  isAll: bool,
+  setActiveTag: func
 }
 
-const mapStateToProps = ({tweets, tags}) => ({tweets, tags})
-export default connect(mapStateToProps)(Timeline)
+export default withLogic(Timeline)
