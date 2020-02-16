@@ -7,7 +7,7 @@ import {ThemeProvider} from 'styled-components'
 import '../styles/main.scss'
 
 import createStore from '../store'
-import {loadUserData} from '../store/actions'
+import {loadUserData, listenTagsON, listenTagsOFF} from '../store/actions'
 import {theme} from '../../config'
 
 class MyApp extends App {
@@ -24,6 +24,14 @@ class MyApp extends App {
     }
 
     return {pageProps}
+  }
+
+  componentDidMount() {
+    this.props.store.dispatch(listenTagsON())
+  }
+
+  componentWillUnmount() {
+    this.props.store.dispatch(listenTagsOFF())
   }
 
   render() {

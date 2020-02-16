@@ -4,6 +4,7 @@ export const defaultState = {
   error: null,
   user: null,
   tags: [],
+  tweets: [],
   isLoading: false
 }
 
@@ -37,6 +38,18 @@ function reducer(state = defaultState, action = null) {
       return {
         ...state,
         ...{tags: defaultState.tags}
+      }
+
+    case actionTypes.LOAD_TWEETS:
+      return {
+        ...state,
+        ...{tweets: action.data}
+      }
+
+    case actionTypes.UNLOAD_TWEETS:
+      return {
+        ...state,
+        ...{tags: defaultState.tweets}
       }
 
     case actionTypes.UPDATE_TAG:

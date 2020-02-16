@@ -1,9 +1,7 @@
-import {useEffect} from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
-import {arrayOf, object, func} from 'prop-types'
+import {arrayOf, object} from 'prop-types'
 
-import {listenTagsON, listenTagsOFF} from '../../store/actions'
 import {Container as UnstyledContainer} from '../../components/Wrapper'
 import {AddTag as UnstyledAddTag} from '../../components/Tags'
 import {TagList} from '../../components/Tags'
@@ -16,15 +14,7 @@ const AddTag = styled(UnstyledAddTag)`
   margin-bottom: 15px;
 `
 
-const Tags = ({dispatch, tags}) => {
-  useEffect(() => {
-    dispatch(listenTagsON())
-
-    return () => {
-      dispatch(listenTagsOFF())
-    }
-  }, [dispatch])
-
+const Tags = ({tags}) => {
   return (
     <Container>
       <AddTag/>
@@ -34,7 +24,6 @@ const Tags = ({dispatch, tags}) => {
 }
 
 Tags.propTypes = {
-  dispatch: func.isRequired,
   tags: arrayOf(object)
 }
 

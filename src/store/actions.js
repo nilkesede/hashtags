@@ -8,6 +8,10 @@ export const actionTypes = {
   LISTEN_TAGS_OFF: 'LISTEN_TAGS_OFF',
   LOAD_USER_TAGS: 'LOAD_USER_TAGS',
   UNLOAD_USER_TAGS: 'UNLOAD_USER_TAGS',
+  LISTEN_TWEETS_ON: 'LISTEN_TWEETS_ON',
+  LISTEN_TWEETS_OFF: 'LISTEN_TWEETS_OFF',
+  LOAD_TWEETS: 'LOAD_TWEETS',
+  UNLOAD_TWEETS: 'UNLOAD_TWEETS',
   SAVE_TAG: 'SAVE_TAG',
   UPDATE_TAG: 'UPDATE_TAG',
   START_LOADING: 'START_LOADING',
@@ -70,6 +74,31 @@ export function loadUserTags(data) {
 export function unloadUserTags() {
   return {
     type: actionTypes.UNLOAD_USER_TAGS
+  }
+}
+
+export function listenTweetsON() {
+  return {
+    type: actionTypes.LISTEN_TWEETS_ON
+  }
+}
+
+export function listenTweetsOFF() {
+  return {
+    type: actionTypes.LISTEN_TWEETS_OFF
+  }
+}
+
+export function loadTweets(data) {
+  return {
+    type: actionTypes.LOAD_TWEETS,
+    data
+  }
+}
+
+export function unloadTweets() {
+  return {
+    type: actionTypes.UNLOAD_TWEETS
   }
 }
 

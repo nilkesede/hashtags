@@ -15,7 +15,10 @@ import {
   listenTagsON,
   listenTagsOFF,
   startLoading,
-  stopLoading
+  stopLoading,
+  loadTweets,
+  listenTweetsOFF,
+  unloadTweets
 } from './actions'
 import {sortByIdDesc} from '../lib/utils'
 
@@ -60,9 +63,13 @@ function * makeLogout() {
     yield put(startLoading())
     yield firebase.auth().signOut()
     yield post('/api/logout')
+
     yield put(listenTagsOFF())
+    yield put(listenTweetsOFF())
+
     yield put(unloadUserData())
     yield put(unloadUserTags())
+    yield put(unloadTweets())
   } catch (error) {
     yield put(failure(error))
   } finally {
@@ -70,16 +77,16 @@ function * makeLogout() {
   }
 }
 
-let channelDB = null
-function * addDatabaseListener() {
+let tagsListener = null
+function * addTagsListener() {
   try {
     const user = yield select(({user}) => user)
 
-    if (!user || channelDB) {
+    if (!user || tagsListener) {
       return
     }
 
-    channelDB = new EventChannel(emiter => {
+    tagsListener = new EventChannel(emiter => {
       const database = firebase.firestore()
 
       return database.collection('tags').onSnapshot(
@@ -107,7 +114,7 @@ function * addDatabaseListener() {
     })
 
     while (true) {
-      const tags = yield take(channelDB)
+      const tags = yield take(tagsListener)
       yield put(loadUserTags(tags))
       yield delay(500)
     }
@@ -116,11 +123,70 @@ function * addDatabaseListener() {
   }
 }
 
-function * removeDatabaseListener() {
-  if (channelDB) {
+function * removeTagsListener() {
+  if (tagsListener) {
     try {
-      yield channelDB.close()
-      channelDB = null
+      yield tagsListener.close()
+      tagsListener = null
+    } catch (error) {
+      yield put(failure(error))
+    }
+  }
+}
+
+let tweetsListener = null
+function * addTweetsListener() {
+  try {
+    const tags = yield select(({tags}) => tags)
+
+    if (!tags || tweetsListener) {
+      return
+    }
+
+    const tagsText = tags.map(t => t.text)
+
+    tweetsListener = new EventChannel(emiter => {
+      const database = firebase.firestore()
+
+      return database.collection('tweets').onSnapshot(
+        snapshot => {
+          const tweets = []
+
+          snapshot.forEach(document_ => {
+            const tweet = document_.data()
+
+            if (tagsText.some(v => tweet.text.includes(v))) {
+              tweets.push(tweet)
+            }
+
+            tweets.sort(sortByIdDesc)
+          })
+
+          if (tweets) {
+            emiter(tweets)
+          }
+        },
+        error => {
+          throw error
+        }
+      )
+    })
+
+    while (true) {
+      const tweets = yield take(tweetsListener)
+      yield put(loadTweets(tweets))
+      yield delay(500)
+    }
+  } catch (error) {
+    yield put(failure(error))
+  }
+}
+
+function * removeTweetsListener() {
+  if (tweetsListener) {
+    try {
+      yield tweetsListener.close()
+      tweetsListener = null
     } catch (error) {
       yield put(failure(error))
     }
@@ -142,8 +208,10 @@ function * rootSaga() {
   yield all([
     takeLatest(actionTypes.MAKE_LOGIN, makeLogin),
     takeLatest(actionTypes.MAKE_LOGOUT, makeLogout),
-    takeLatest(actionTypes.LISTEN_TAGS_ON, addDatabaseListener),
-    takeLatest(actionTypes.LISTEN_TAGS_OFF, removeDatabaseListener),
+    takeLatest(actionTypes.LISTEN_TAGS_ON, addTagsListener),
+    takeLatest(actionTypes.LISTEN_TAGS_OFF, removeTagsListener),
+    takeLatest(actionTypes.LISTEN_TWEETS_ON, addTweetsListener),
+    takeLatest(actionTypes.LISTEN_TWEETS_OFF, removeTweetsListener),
     takeEvery(actionTypes.SAVE_TAG, saveTagOnDatabase)
   ])
 }
