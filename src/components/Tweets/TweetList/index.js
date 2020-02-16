@@ -3,12 +3,19 @@ import styled from 'styled-components'
 
 import {Tweet as UnstyledTweet} from '..'
 
+const Wrapper = styled.div`
+  padding: 5px;
+  margin: 0 -5px;
+`
+
 const Tweet = styled(UnstyledTweet)`
   margin-bottom: 15px;
 `
 
-const TweetList = ({tweets}) => (
-  tweets.map(tweet => <Tweet key={tweet.id} tweet={tweet}/>)
+const TweetList = ({tweets, ...restProps}) => (
+  <Wrapper {...restProps}>
+    {tweets.map(tweet => <Tweet key={tweet.id} tweet={tweet}/>)}
+  </Wrapper>
 )
 
 TweetList.propTypes = {
