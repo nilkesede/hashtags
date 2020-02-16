@@ -148,28 +148,29 @@ function * addTweetsListener() {
     tweetsListener = new EventChannel(emiter => {
       const database = firebase.firestore()
 
-      return database.collection('tweets').onSnapshot(
-        snapshot => {
-          const tweets = []
+      return database.collection('tweets')
+        .orderBy('id', 'desc')
+        .limit(100)
+        .onSnapshot(
+          snapshot => {
+            const tweets = []
 
-          snapshot.forEach(document_ => {
-            const tweet = document_.data()
+            snapshot.forEach(document_ => {
+              const tweet = document_.data()
 
-            if (tagsText.some(v => tweet.text.includes(v))) {
-              tweets.push(tweet)
+              if (tagsText.some(v => tweet.text.includes(v))) {
+                tweets.push(tweet)
+              }
+            })
+
+            if (tweets) {
+              emiter(tweets)
             }
-
-            tweets.sort(sortByIdDesc)
-          })
-
-          if (tweets) {
-            emiter(tweets)
+          },
+          error => {
+            throw error
           }
-        },
-        error => {
-          throw error
-        }
-      )
+        )
     })
 
     while (true) {
