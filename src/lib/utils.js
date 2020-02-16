@@ -9,3 +9,28 @@ export const sortByIdDesc = (a, b) => {
 
   return 0
 }
+
+export const formatDate = date => {
+  const monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ]
+
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const day = date.getDate()
+  const monthIndex = date.getMonth()
+  const year = date.getFullYear()
+
+  return `${hour}:${minute} · ${monthNames[monthIndex]} ${day}, ${year}`
+}
