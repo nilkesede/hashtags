@@ -9,7 +9,7 @@ import {Text} from '../../components/Text'
 
 const Container = styled(UnstyledContainer)`
   margin-top: 15px;
-  min-height: 100vh
+  height: calc(100vh - 95px);
 `
 
 const TermList = styled.div`
@@ -22,7 +22,7 @@ const Term = styled(Badge)`
 `
 
 const TweetList = styled(UnstyledTweetList)`
-  height: 100vh;
+  height: 100%;
   overflow: auto;
 `
 

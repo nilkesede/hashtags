@@ -10,6 +10,9 @@ export const sortByIdDesc = (a, b) => {
   return 0
 }
 
+export const leftPad = (str, maxLength) =>
+  String(str).padStart(maxLength, '0')
+
 export const formatDate = date => {
   const monthNames = [
     'Jan',
@@ -32,5 +35,5 @@ export const formatDate = date => {
   const monthIndex = date.getMonth()
   const year = date.getFullYear()
 
-  return `${hour}:${minute} · ${monthNames[monthIndex]} ${day}, ${year}`
+  return `${hour}:${leftPad(minute, 2)} · ${monthNames[monthIndex]} ${day}, ${year}`
 }
